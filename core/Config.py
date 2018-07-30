@@ -5,7 +5,10 @@ class Config:
 
     CREDENTIALS_PATH = "credentials.json"
     CONFIG_PATH = "config.json"
+    API_KEY = "api_key"
     DEFAULTS_KEY = "defaults"
+    LEAGUE_KEY = "league_id"
+    START_SUMM_KEY = "summoner_name"
 
     def __init__(self):
         # Get credentials
@@ -18,3 +21,6 @@ class Config:
 
     def get_defaults(self):
         return self.config[self.DEFAULTS_KEY]
+
+    def get_api_key(self):
+        return self.credentials[self.API_KEY]

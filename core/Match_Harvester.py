@@ -33,3 +33,4 @@ class MatchHarvester:
         return self.make_request(self.CHALLENGER_PATH + self.config_manager.get_defaults_queue_id())
 
     # TODO: Get match histories starting with the top challenger player
+    # TODO: Get champion matchups from match histories

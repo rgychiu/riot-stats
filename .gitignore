@@ -3,3 +3,4 @@ credentials.json
 
 # Pycharm Files
 .idea/
+__pycache__

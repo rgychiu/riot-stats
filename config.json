@@ -1,5 +1,5 @@
 {
   "defaults": {
-
+    "queue": "RANKED_SOLO_5x5"
   }
 }

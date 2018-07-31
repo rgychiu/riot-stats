@@ -3,12 +3,14 @@ import json
 
 class Config:
 
+    # Default file paths
     CREDENTIALS_PATH = "credentials.json"
     CONFIG_PATH = "config.json"
+
+    # Defaults and credentials
     API_KEY = "api_key"
     DEFAULTS_KEY = "defaults"
-    LEAGUE_KEY = "league_id"
-    START_SUMM_KEY = "summoner_name"
+    DEFAULT_QUEUE_ID = "queue_id"
 
     def __init__(self):
         # Get credentials
@@ -24,3 +26,9 @@ class Config:
 
     def get_api_key(self):
         return self.credentials[self.API_KEY]
+
+    def get_defaults_queue_id(self):
+        return self.get_defaults()[self.DEFAULT_QUEUE_ID]
+
+    def get_defaults_summoner(self):
+        return self.get_defaults()[self.START_SUMM_KEY]

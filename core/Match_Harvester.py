@@ -46,5 +46,8 @@ class MatchHarvester:
                 player_json = player
         return player_json
 
+    def get_player_data(self, player_name):
+        return self.make_request(self.SUMMONER_PATH + '/by-name/' + player_name)
+
     # TODO: Get match histories starting with the top challenger player
     # TODO: Get champion matchups from match histories

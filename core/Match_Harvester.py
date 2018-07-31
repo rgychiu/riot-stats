@@ -6,9 +6,9 @@ class MatchHarvester:
 
     BASE_URL_PATH = 'https://na1.api.riotgames.com/lol'
     CHALLENGER_PATH = BASE_URL_PATH + '/league/v3/challengerleagues/by-queue/'
-    MATCH_PATH = BASE_URL_PATH + '/match/v3/matches'
-    SUMMONER_PATH = BASE_URL_PATH + '/summoner/v3/summoners'
-    CHAMPION_PATH = BASE_URL_PATH + '/platform/v3/champions'
+    MATCH_PATH = BASE_URL_PATH + '/match/v3/matches/'
+    SUMMONER_PATH = BASE_URL_PATH + '/summoner/v3/summoners/'
+    CHAMPION_PATH = BASE_URL_PATH + '/platform/v3/champions/'
 
     def __init__(self):
         # Load config for defaults & key
@@ -46,8 +46,11 @@ class MatchHarvester:
                 player_json = player
         return player_json
 
-    def get_player_data(self, player_name):
-        return self.make_request(self.SUMMONER_PATH + '/by-name/' + player_name)
+    def get_player_data_by_name(self, player_name):
+        return self.make_request(self.SUMMONER_PATH + 'by-name/' + player_name)
+
+    def get_player_data_by_id(self, player_id):
+        return self.make_request(self.SUMMONER_PATH + player_id)
 
     # TODO: Get match histories starting with the top challenger player
     # TODO: Get champion matchups from match histories

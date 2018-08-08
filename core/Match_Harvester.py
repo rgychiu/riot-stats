@@ -52,5 +52,11 @@ class MatchHarvester:
     def get_player_data_by_id(self, player_id):
         return self.make_request(self.SUMMONER_PATH + player_id)
 
+    def list_player_matches(self, account_id):
+        return self.make_request(self.MATCH_PATH + 'by-account/' + account_id)
+
+    def get_match_data(self, match_id):
+        return self.make_request(self.MATCH_PATH + match_id)
+
     # TODO: Get match histories starting with the top challenger player
     # TODO: Get champion matchups from match histories

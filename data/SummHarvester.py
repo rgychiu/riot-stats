@@ -1,5 +1,9 @@
 from data.Harvester import Harvester
 
+"""
+Harvester for the Summoner endpoints (i.e. Getting summoner by name, account id, etc.).
+"""
+
 
 class SummHarvester(Harvester):
 

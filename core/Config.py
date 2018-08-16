@@ -33,6 +33,3 @@ class Config:
 
     def get_defaults_queue_id(self):
         return self.get_defaults()[self.DEFAULT_QUEUE_ID]
-
-    def get_defaults_summoner(self):
-        return self.get_defaults()[self.START_SUMM_KEY]

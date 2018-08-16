@@ -1,5 +1,9 @@
 from data.Harvester import Harvester
 
+"""
+Harvester for division/league endpoints (i.e. Challenger league, Master league, etc.)
+"""
+
 
 class DivHarvester(Harvester):
 

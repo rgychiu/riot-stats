@@ -4,7 +4,7 @@ import json
 class Config:
 
     # Default file paths
-    CREDENTIALS_PATH = "credentials.json"
+    DEFAULT_CREDENTIALS_PATH = "credentials_path"
     CONFIG_PATH = "config.json"
 
     # Defaults and credentials
@@ -12,10 +12,11 @@ class Config:
     DEFAULTS_KEY = "defaults"
     DEFAULT_QUEUE_ID = "queue_id"
 
-    def __init__(self):
+    def __init__(self, cred_path=None):
         # Get credentials
-        with open(self.CREDENTIALS_PATH, 'rU') as cred_file:
-            self.credentials = json.load(cred_file)
+        self.credentials_file = cred_path or self.DEFAULT_CREDENTIALS_PATH
+        with open(self.credentials_file, 'rU') as file:
+            self.credentials = json.load(file)
 
         # Load defaults json
         with open(self.CONFIG_PATH, 'rU') as config_file:

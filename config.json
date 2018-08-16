@@ -1,5 +1,7 @@
 {
+  "credentials_path": "credentials.json",
   "defaults": {
-    "queue": "RANKED_SOLO_5x5"
+    "queue": "RANKED_SOLO_5x5",
+    "queue_id": 420
   }
 }

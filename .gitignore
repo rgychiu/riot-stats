@@ -1,6 +1,9 @@
 # API Credentials
 credentials.json
 
+# Log files
+*.log
+
 # Pycharm Files
 .idea/
 __pycache__

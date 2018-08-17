@@ -17,11 +17,11 @@ class Harvester:
     _CHAMPION_PATH = _BASE_URL_PATH + '/platform/v3/champions/'
 
     # Total matches to fetch
-    TOTAL_MATCHES = 1000000
+    TOTAL_MATCHES = 100000
 
     def __init__(self):
         # Load config for defaults & key
-        self.config_manager = Config()
+        self.config_manager = Config().get_instance()
         self.api_key = self.config_manager.get_api_key()
 
     def make_request(self, path):
@@ -30,7 +30,8 @@ class Harvester:
         :param path: endpoint to query
         :return:
         """
-        payload = {'api_key': self.config_manager.get_api_key()}
+        payload = {'api_key': self.api_key}
+        print(path + str(requests.get(path, params=payload)))
         return requests.get(path, params=payload).json()
 
     def get_challenger_path(self):

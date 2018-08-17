@@ -1,10 +1,12 @@
 import json
+from core.Singleton import Singleton
 
 
-class Config:
+class Config(Singleton):
 
     # Default file paths
     DEFAULT_CREDENTIALS_PATH = "credentials_path"
+    LOG_PATH_KEY = "log_path"
     CONFIG_PATH = "config.json"
 
     # Defaults and credentials
@@ -13,6 +15,8 @@ class Config:
     DEFAULT_QUEUE_ID = "queue_id"
 
     def __init__(self, cred_path=None):
+        super().__init__()
+
         # Load defaults json
         with open(self.CONFIG_PATH, 'rU') as config_file:
             self.config = json.load(config_file)
@@ -23,7 +27,10 @@ class Config:
             self.credentials = json.load(file)
 
     def get_default_credentials_path(self):
-        return self.config['credentials_path']
+        return self.config[self.DEFAULT_CREDENTIALS_PATH]
+
+    def get_default_log_path(self):
+        return self.config[self.LOG_PATH_KEY]
 
     def get_defaults(self):
         return self.config[self.DEFAULTS_KEY]

@@ -3,7 +3,7 @@ Application making use of the Riot Games API and statistics. Using the Riot's
 developer portal, the web application will analyze the data and display statistics
 ranging from matchup win rates, counter-picks, common runes, and more.
 
-###Project Setup
+### Project Setup
 In order to get started with using the API Developer Portal and the Harvesters, 
 first clone the repository:
 ```

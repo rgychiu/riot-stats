@@ -24,15 +24,24 @@ class Harvester:
         self.config_manager = Config().get_instance()
         self.api_key = self.config_manager.get_api_key()
 
-    def make_request(self, path):
+    def make_request(self, path, payload=None):
         """
         Make request to Riot API Developer endpoint with optional data
         :param path: endpoint to query
+        :param payload: optional parameters to send with the request
         :return:
         """
-        payload = {'api_key': self.api_key}
-        print(path + str(requests.get(path, params=payload)))
-        return requests.get(path, params=payload).json()
+        try:
+            if payload is None:
+                payload = {'api_key': self.api_key}
+            else:
+                payload['api_key'] = self.api_key
+            response = requests.get(path, params=payload)
+            print(path + str(response))
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException:
+            return None
 
     def get_challenger_path(self):
         return self._CHALLENGER_PATH

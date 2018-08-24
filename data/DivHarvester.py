@@ -15,14 +15,15 @@ class DivHarvester(Harvester):
         Get list of all challenger tier players.
         :return: API JSON response for challenger players
         """
-        return self.make_request(self.get_challenger_path() + self.config_manager.get_defaults_queue_id())
+        return self.make_request(self.get_challenger_path() + str(self.config_manager.get_defaults_queue()))
 
     def get_top_challenger(self):
         """
         Get top challenger player based on LP.
         :return: Player JSON data with highest LP
         """
-        challenger_list = self.get_sr_challenger_league()
+        challenger_list = self.get_sr_challenger_league()['entries']
+        print(challenger_list)
         max_LP = 0
         player_json = None
         for player in challenger_list:

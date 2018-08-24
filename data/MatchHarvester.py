@@ -38,19 +38,24 @@ class MatchHarvester(Harvester):
         if len(matches) == self.TOTAL_MATCHES:
             return matches
 
-        print(len(matches))
-        data = self.get_match_data(match_id)
-        for player in data['participantIdentities']:
-            account_id = player['player']['accountId']
-            if account_id in queried_players:
-                continue
-            new_matches = self.list_player_ranked_sr_matches(account_id)['matches']
-            matches |= set([match['gameId'] for match in new_matches])
-            for match in new_matches:
-                if match['gameId'] in queried_matches:
+        try:
+            print(len(matches))
+            data = self.get_match_data(match_id)
+            time.sleep(2)
+            for player in data['participantIdentities']:
+                account_id = player['player']['accountId']
+                if account_id in queried_players:
                     continue
-                queried_matches.add(match['gameId'])
-                return self.recurse_ranked_sr_matches(match['gameId'], matches, queried_matches, queried_players)
+                new_matches = self.list_player_ranked_sr_matches(account_id)['matches']
+                matches |= set([match['gameId'] for match in new_matches])
+                for match in new_matches:
+                    if match['gameId'] in queried_matches:
+                        continue
+                    queried_matches.add(match['gameId'])
+                    return self.recurse_ranked_sr_matches(match['gameId'], matches, queried_matches, queried_players)
+        except TypeError:
+            # Returned None from request as a result of error status
+            return matches
 
     def get_all_tier_ranked_matches(self, starting_summ):
         """
@@ -58,9 +63,11 @@ class MatchHarvester(Harvester):
         :param starting_summ: summoner to start getting match data from
         :return:
         """
+        # Get starting points for recursion (challenger player, matches, and ids)
         root_id = self.summ_harvester.get_player_data_by_name(starting_summ)['accountId']
         root_matches = self.list_player_ranked_sr_matches(root_id)['matches']
-        root_match_ids = [match['gameId'] for match in root_matches]
-        match_ids = [match['gameId'] for match in root_matches]
-        for ids in match_ids:
-            return self.recurse_ranked_sr_matches(ids, set(root_match_ids), set(), set())
+        root_match_ids = set([match['gameId'] for match in root_matches])
+        all_match_ids = set(root_match_ids)
+        for ids in root_match_ids:
+            all_match_ids |= self.recurse_ranked_sr_matches(ids, set(root_match_ids), set(), set())
+        return all_match_ids

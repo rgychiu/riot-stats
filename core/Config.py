@@ -12,6 +12,7 @@ class Config(Singleton):
     # Defaults and credentials
     API_KEY = "api_key"
     DEFAULTS_KEY = "defaults"
+    DEFAULT_QUEUE = "queue"
     DEFAULT_QUEUE_ID = "queue_id"
 
     def __init__(self, cred_path=None):
@@ -37,6 +38,9 @@ class Config(Singleton):
 
     def get_api_key(self):
         return self.credentials[self.API_KEY]
+
+    def get_defaults_queue(self):
+        return self.get_defaults()[self.DEFAULT_QUEUE]
 
     def get_defaults_queue_id(self):
         return self.get_defaults()[self.DEFAULT_QUEUE_ID]

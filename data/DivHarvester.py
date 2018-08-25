@@ -23,7 +23,6 @@ class DivHarvester(Harvester):
         :return: Player JSON data with highest LP
         """
         challenger_list = self.get_sr_challenger_league()['entries']
-        print(challenger_list)
         max_LP = 0
         player_json = None
         for player in challenger_list:

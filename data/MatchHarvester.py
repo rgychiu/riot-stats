@@ -2,6 +2,7 @@ import time
 from data.Harvester import Harvester
 from data.SummHarvester import SummHarvester
 from api.db.Database import Database
+from api.db.DB_Config import DBConfig
 
 """
 Harvester for the matches endpoint.
@@ -71,3 +72,26 @@ class MatchHarvester(Harvester):
         for ids in root_match_ids:
             all_match_ids |= self.recurse_ranked_sr_matches(ids, set(root_match_ids), set(), set())
         return all_match_ids
+
+    def post_matches(self, match_ids):
+        """
+        Method to post match data to database
+        :param match_ids: set of match_ids to post to database
+        :return:
+        """
+        # Instantiate DB objects in method rather than constructor since not all instances will need DB connection
+        # Only create DB connection when posting matches
+        db_config = DBConfig()
+        db_instance = Database()
+        database = db_instance.get_database(db_config.get_db_name())
+        collection = db_instance.get_collection(database, db_config.get_match_collection_name())
+
+        # Can't do list comprehension here - avoid exceeding rate limits
+        match_datas = []
+        for game_id in match_ids:
+            game_details = self.get_match_data(game_id)
+            # Make gameId the unique ID in DB
+            game_details['_id'] = game_details.pop('gameId')
+            match_datas.append(game_details)
+            time.sleep(1)
+        db_instance.post_bulk_documents(match_datas, collection)

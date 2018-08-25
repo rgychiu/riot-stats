@@ -1,5 +1,6 @@
 import requests
 from core.Config import Config
+from core.Logger import Logger
 
 """
 Base class for each Harvester to inherit from. Contains all the endpoints, making a request,
@@ -23,6 +24,7 @@ class Harvester:
         # Load config for defaults & key
         self.config_manager = Config().get_instance()
         self.api_key = self.config_manager.get_api_key()
+        self.logger = Logger()
 
     def make_request(self, path, payload=None):
         """
@@ -37,7 +39,7 @@ class Harvester:
             else:
                 payload['api_key'] = self.api_key
             response = requests.get(path, params=payload)
-            print(path + str(response))
+            self.logger.info(path + str(response))
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException:

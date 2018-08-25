@@ -39,7 +39,6 @@ class MatchHarvester(Harvester):
             return matches
 
         try:
-            print(len(matches))
             data = self.get_match_data(match_id)
             time.sleep(2)
             for player in data['participantIdentities']:

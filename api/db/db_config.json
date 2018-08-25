@@ -1,0 +1,8 @@
+{
+  "mongo_uri": "mongodb://gener1c_user:gener1c_user@ds229312.mlab.com:29312/riot_stats_db",
+  "db_defaults": {
+    "db_name": "riot_stats_db",
+    "match_collection": "match",
+    "champion_collection": "champion"
+  }
+}

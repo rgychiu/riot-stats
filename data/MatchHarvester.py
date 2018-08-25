@@ -1,6 +1,7 @@
 import time
 from data.Harvester import Harvester
 from data.SummHarvester import SummHarvester
+from api.db.Database import Database
 
 """
 Harvester for the matches endpoint.

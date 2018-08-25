@@ -1,11 +1,13 @@
 import pymongo
 from api.db import DB_Config
-from core import Singleton
+from core.Singleton import Singleton
 
 
 class Database(Singleton):
 
     def __init__(self):
+        super().__init__()
+
         # Get database config manager and initiate connection to the database
         self.mongo_config = DB_Config.DBConfig()
         self.client = pymongo.MongoClient(self.mongo_config.get_mongo_uri())

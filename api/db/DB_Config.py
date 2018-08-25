@@ -1,5 +1,5 @@
 import json
-from core import Singleton
+from core.Singleton import Singleton
 
 
 class DBConfig(Singleton):
@@ -13,6 +13,8 @@ class DBConfig(Singleton):
     CHAMP_COLLECTION_KEY = "champion_collection"
 
     def __init__(self):
+        super().__init__()
+
         with open(self.DB_CONFIG_PATH, 'r') as cred_file:
             self.mongo_creds = json.load(cred_file)
 

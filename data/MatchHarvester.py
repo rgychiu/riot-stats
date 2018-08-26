@@ -89,9 +89,12 @@ class MatchHarvester(Harvester):
         # Can't do list comprehension here - avoid exceeding rate limits
         match_datas = []
         for game_id in match_ids:
-            game_details = self.get_match_data(game_id)
-            # Make gameId the unique ID in DB
-            game_details['_id'] = game_details.pop('gameId')
-            match_datas.append(game_details)
-            time.sleep(1)
+            try:
+                game_details = self.get_match_data(game_id)
+                # Make gameId the unique ID in DB
+                game_details['_id'] = game_details.pop('gameId')
+                match_datas.append(game_details)
+                time.sleep(1)
+            except AttributeError:
+                continue
         db_instance.post_bulk_documents(match_datas, collection)

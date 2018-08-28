@@ -18,7 +18,7 @@ class Harvester:
     _CHAMPION_PATH = _BASE_URL_PATH + '/platform/v3/champions/'
 
     # Total matches to fetch
-    TOTAL_MATCHES = 100000
+    TOTAL_MATCHES = 1000
 
     def __init__(self):
         # Load config for defaults & key

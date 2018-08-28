@@ -37,7 +37,7 @@ class MatchHarvester(Harvester):
         :param queried_players: set of previously found players
         :return:
         """
-        if len(matches) == self.TOTAL_MATCHES:
+        if len(matches) >= self.TOTAL_MATCHES:
             return matches
 
         try:

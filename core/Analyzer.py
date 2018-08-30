@@ -33,6 +33,14 @@ class Analyzer:
         """
         return self.db_instance.get_bulk_documents(self.match_collection)
 
+    def get_matches(self, query):
+        """
+        Overloaded method to get matches using specific query
+        :param query:
+        :return:
+        """
+        return self.db_instance.get_bulk_documents(self.match_collection, query)
+
     def get_champion(self, champion_name):
         """
         Get data for specified champion.

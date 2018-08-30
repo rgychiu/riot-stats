@@ -7,6 +7,8 @@ class AnalyzerTest(unittest.TestCase):
     def setUp(self):
         self.analyzer = Analyzer()
 
+    # Test getting data from database
+    # Not rigorous since DB fetching decently reliable, making sure parameters and queries are correct
     def test_get_match_count(self):
         self.assertTrue(self.analyzer.get_total_matches() > 0)
 
@@ -18,3 +20,6 @@ class AnalyzerTest(unittest.TestCase):
 
     def test_get_champion_id(self):
         self.assertTrue(self.analyzer.get_champion_id('Aatrox') == 266)
+
+    if __name__ == '__main__':
+        unittest.main()

@@ -1,5 +1,5 @@
 import pymongo
-from api.db import DB_Config
+from api.db.DB_Config import DBConfig
 from core.Singleton import Singleton
 
 
@@ -9,7 +9,7 @@ class Database(Singleton):
         super().__init__()
 
         # Get database config manager and initiate connection to the database
-        self.mongo_config = DB_Config.DBConfig()
+        self.mongo_config = DBConfig()
         self.client = pymongo.MongoClient(self.mongo_config.get_mongo_uri())
 
     def list_db_names(self):

@@ -15,7 +15,6 @@ class Harvester:
     _CHALLENGER_PATH = _BASE_URL_PATH + '/league/v3/challengerleagues/by-queue/'
     _MATCH_PATH = _BASE_URL_PATH + '/match/v3/'
     _SUMMONER_PATH = _BASE_URL_PATH + '/summoner/v3/summoners/'
-    _CHAMPION_PATH = _BASE_URL_PATH + '/platform/v3/champions/'
 
     # Total matches to fetch
     TOTAL_MATCHES = 1000

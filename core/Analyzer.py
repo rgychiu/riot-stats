@@ -14,7 +14,10 @@ class Analyzer:
         self.db_config = DBConfig()
         self.db_instance = Database()
         self.database = self.db_instance.get_database(self.db_config.get_db_name())
-        self.match_collection = self.db_instance.get_collection(self.database, self.db_config.get_match_collection_name())
+        self.match_collection = self.db_instance.get_collection(self.database,
+                                                                self.db_config.get_match_collection_name())
+        self.champ_collection = self.db_instance.get_collection(self.database,
+                                                                self.db_config.get_champion_collection_name())
 
     def get_total_matches(self):
         """
@@ -30,3 +33,18 @@ class Analyzer:
         """
         return self.db_instance.get_bulk_documents(self.match_collection)
 
+    def get_champion(self, champion_name):
+        """
+        Get data for specified champion.
+        :param champion_name: name of champion
+        :return: json data for champion
+        """
+        return self.db_instance.get_single_document(self.champ_collection, {"name": champion_name})
+
+    def get_champion_id(self, champion_name):
+        """
+        Get champion id for specified champion
+        :param champion_name: name of champion
+        :return: id of champion
+        """
+        return self.db_instance.get_single_document(self.champ_collection, {"name": champion_name})['id']

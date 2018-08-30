@@ -53,8 +53,5 @@ class Harvester:
     def get_summoner_path(self):
         return self._SUMMONER_PATH
 
-    def get_champion_path(self):
-        return self._CHAMPION_PATH
-
     def get_total_matches(self):
         return self.TOTAL_MATCHES

@@ -1,8 +1,7 @@
 # TODO: Given list of champion matchups, count frequecy and other stats prior to analysis
 # TODO: Build off win rate percentage vs different champions to imply counterpick
 # TODO: Get itemization if possible
-# TODO: Get runes if possible, calculate win rate of certain runes on champions
-# TODO: Calculate popularity of runes on champions
+# TODO: Rune data and popularity on champions (Haven't reached the API)
 from api.db.Database import Database
 from api.db.DB_Config import DBConfig
 
@@ -48,6 +47,13 @@ class Analyzer:
         :return: json data for champion
         """
         return self.db_instance.get_single_document(self.champ_collection, {"name": champion_name})
+
+    def get_champions(self):
+        """
+        Get all champions from db.
+        :return: cursor object with all champions
+        """
+        return self.db_instance.get_bulk_documents(self.champ_collection)
 
     def get_champion_id(self, champion_name):
         """
@@ -96,6 +102,7 @@ class Analyzer:
         :param champion2_name: second champ in matchup
         :return: tuple of win percentages for matchup
         """
+        # TODO: Ensure matchup is in the same lane and champions are not on the same team
         champion1_id = int(self.get_champion_id(champion1_name.title()))
         champion2_id = int(self.get_champion_id(champion2_name.title()))
         seen_matches = self.get_matches_by_query({

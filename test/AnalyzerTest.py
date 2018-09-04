@@ -1,5 +1,5 @@
 import unittest
-from core.Analyzer import Analyzer
+from analysis.Analyzer import Analyzer
 
 
 class AnalyzerTest(unittest.TestCase):

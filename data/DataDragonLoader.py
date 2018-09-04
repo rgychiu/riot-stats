@@ -34,6 +34,7 @@ class DataDragonLoader:
         return data
 
     def get_rune_data(self):
+        # TODO: Implement when new rune system goes live on API
         data = self.get_data(self._RUNE_URL)
         return data
 

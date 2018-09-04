@@ -14,10 +14,12 @@ _MAX_LEN_RETURN = 10
 _GET_CHAMPION_WINRATE = '/winrate/<champion_name>'
 _GET_MATCHUP_WINRATE = '/winrate/matchup'
 
+
 # TODO: Catch errors
 @app.route(_GET_CHAMPION_WINRATE)
 def get_champion_winrate(champion_name):
     return create_response(data=champ_analyzer.champion_winrate(champion_name), status=200)
+
 
 @app.route(_GET_MATCHUP_WINRATE)
 def get_matchup_winrate():

@@ -1,11 +1,15 @@
 import unittest
 from analysis.Analyzer import Analyzer
+from analysis.ChampionAnalyzer import ChampionAnalyzer
+from analysis.MatchAnalyzer import MatchAnalyzer
 
 
 class AnalyzerTest(unittest.TestCase):
 
     def setUp(self):
         self.analyzer = Analyzer()
+        self.champ_analyzer = ChampionAnalyzer()
+        self.match_analyzer = MatchAnalyzer()
 
     # Test getting data from database
     # Not rigorous since DB fetching decently reliable, making sure parameters and queries are correct

@@ -15,6 +15,11 @@ class ChampionAnalyzer(Analyzer):
         Rank champions in descending order based on win rate.
         :return: array of champions sorted by win rate.
         """
+        champions = self.get_champions()
+        win_rates = [(champ['name'],
+                      self.get_winrate(int(champ['_id']), self.get_matches_by_query({"participants.championId": int(champ['_id'])})))
+                     for champ in champions]
+        return sorted(win_rates, key=lambda kv_pair: kv_pair[1], reverse=True)
 
     def champion_winrate(self, champion_name):
         """
